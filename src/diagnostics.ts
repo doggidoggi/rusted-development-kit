@@ -1,6 +1,11 @@
 import * as vscode from "vscode";
 import { ParsedDocument } from "./model";
-import { lookupField, isKnownSectionType, isDeprecated } from "./schema";
+import {
+  lookupField,
+  isKnownSectionType,
+  isDeprecated,
+  SectionTypes,
+} from "./schema";
 
 /**
  * A single lint check. New rules are plain objects implementing this
@@ -64,6 +69,7 @@ const unknownFields: LintRule = {
       for (const field of section.fields) {
         if (field.isDirective) continue;
         if (lookupField(section.type, field.key)) continue;
+        if (section.type === SectionTypes.Template) continue;
 
         findings.push({
           range: field.keyRange,

@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import { getParsed } from "./parseCache";
-import { lookupField, isDeprecated } from "./schema";
+import { isDeprecated, resolveField } from "./schema";
 
 export function createHoverProvider(): vscode.HoverProvider {
   return {
@@ -25,15 +25,23 @@ export function createHoverProvider(): vscode.HoverProvider {
           if (!onKey && !onValue) continue;
           if (field.isDirective) return undefined;
 
-          const doc = lookupField(s.type, field.key);
+          const resolved = resolveField(s.type, field.key);
+          if (resolved.kind === "skip") return undefined;
+
           const md = new vscode.MarkdownString();
           md.supportThemeIcons = true;
 
-          if (!doc) {
+          if (resolved.kind === "unknown") {
             md.appendCodeblock(field.key, "rustedwarfare");
-            md.appendMarkdown(`$(circle-slash) not found in docs \`${s.type}\``);
+            md.appendMarkdown(
+              s.type === "template"
+                ? `$(circle-slash) Not found in any documented section`
+                : `$(circle-slash) Not found in docs \`${s.type}\``,
+            );
             return new vscode.Hover(md);
           }
+
+          const doc = resolved.doc;
 
           const signature = doc.valueType
             ? `${doc.key}: ${doc.valueType}`
@@ -41,6 +49,8 @@ export function createHoverProvider(): vscode.HoverProvider {
           md.appendCodeblock(signature, "rustedwarfare");
 
           const badges: string[] = [];
+          if (s.type === "template")
+            badges.push(`$(info) Resolved from an unknown target section`);
           if (doc.group) badges.push(`$(tag) ${doc.group}`);
           if (isDeprecated(doc))
             badges.push(`$(warning) Deprecated, but still works`);

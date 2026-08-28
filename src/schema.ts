@@ -97,4 +97,57 @@ export function lookupDirective(name: string) {
   return schema.directives.find((d) => d.name === name);
 }
 
+const NON_VALIDATABLE_SECTION_TYPES = new Set(["template", "comment"]);
+
+export function isNonValidatableSectionType(sectionType: string): boolean {
+  return NON_VALIDATABLE_SECTION_TYPES.has(sectionType);
+}
+
+export function lookupFieldAnywhere(key: string): FieldDoc | undefined {
+  for (const sectionType of Object.keys(schema.sections)) {
+    if (NON_VALIDATABLE_SECTION_TYPES.has(sectionType)) continue;
+    const found = lookupField(sectionType, key);
+    if (found) return found;
+  }
+  return undefined;
+}
+
+export type FieldResolution =
+  | { kind: "skip" }
+  | { kind: "found"; doc: FieldDoc }
+  | { kind: "unknown" };
+
+
+export function resolveField(
+  sectionType: string,
+  key: string,
+): FieldResolution {
+  if (sectionType === "comment") return { kind: "skip" };
+  const doc =
+    sectionType === "template"
+      ? lookupFieldAnywhere(key)
+      : lookupField(sectionType, key);
+  return doc ? { kind: "found", doc } : { kind: "unknown" };
+}
+
+type PascalCase<S extends string> = S extends `${infer Head}_${infer Tail}`
+  ? `${Capitalize<Head>}${PascalCase<Tail>}`
+  : Capitalize<S>;
+
+function toPascalCase(s: string): string {
+  return s
+    .split("_")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join("");
+}
+
+export type SectionType = keyof typeof schema.sections;
+
+export const SectionTypes = Object.fromEntries(
+  (Object.keys(schema.sections) as SectionType[]).map((key) => [
+    toPascalCase(key),
+    key,
+  ]),
+) as { [K in SectionType as PascalCase<K>]: K };
+
 export { schema };
