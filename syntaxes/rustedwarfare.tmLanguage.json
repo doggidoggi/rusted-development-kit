@@ -1,0 +1,641 @@
+{
+    "name": "Rusted Warfare INI",
+    "scopeName": "source.rustedwarfare",
+    "patterns": [
+        {
+            "include": "#multilineComment"
+        },
+        {
+            "include": "#commentSection"
+        },
+        {
+            "include": "#multistring"
+        },
+        {
+            "include": "#comments"
+        },
+        {
+            "include": "#section"
+        },
+        {
+            "include": "#memoryDefinition"
+        },
+        {
+            "include": "#directive"
+        },
+        {
+            "include": "#key"
+        },
+        {
+            "include": "#value"
+        }
+    ],
+    "repository": {
+        "multilineComment": {
+            "comment": "\"\"\" в НАЧАЛЕ строки (кроме пробелов) — это блок-комментарий",
+            "begin": "^\\s*\"\"\"",
+            "end": "\"\"\"",
+            "name": "comment.block.rustedwarfare"
+        },
+        "commentSection": {
+            "comment": "секция [comment_XXX] — всё до следующей секции считается комментарием",
+            "begin": "^\\s*\\[comment_[^\\]]*\\]",
+            "end": "(?=^\\s*\\[[^\\]]*\\])",
+            "name": "comment.block.section.rustedwarfare",
+            "patterns": [
+                {
+                    "match": ".*",
+                    "name": "comment.block.rustedwarfare"
+                }
+            ]
+        },
+        "multistring": {
+            "comment": "\"\"\" НЕ в начале строки — это многострочная строка-значение, а не комментарий",
+            "begin": "\"\"\"",
+            "end": "\"\"\"",
+            "name": "string.quoted.triple.rustedwarfare"
+        },
+        "memoryDefinition": {
+            "comment": "@memory name: type — каждый тип получает свой scope",
+            "patterns": [
+                {
+                    "match": "^\\s*(@memory)\\s+([A-Za-z0-9_]+)\\s*(:)\\s*(unit)(\\[\\])?",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.control.directive.rustedwarfare"
+                        },
+                        "2": {
+                            "name": "variable.other.memory.name.rustedwarfare"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.key-value.rustedwarfare"
+                        },
+                        "4": {
+                            "name": "storage.type.unit.rustedwarfare"
+                        },
+                        "5": {
+                            "name": "storage.modifier.array.rustedwarfare"
+                        }
+                    }
+                },
+                {
+                    "match": "^\\s*(@memory)\\s+([A-Za-z0-9_]+)\\s*(:)\\s*(float)(\\[\\])?",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.control.directive.rustedwarfare"
+                        },
+                        "2": {
+                            "name": "variable.other.memory.name.rustedwarfare"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.key-value.rustedwarfare"
+                        },
+                        "4": {
+                            "name": "storage.type.float.rustedwarfare"
+                        },
+                        "5": {
+                            "name": "storage.modifier.array.rustedwarfare"
+                        }
+                    }
+                },
+                {
+                    "match": "^\\s*(@memory)\\s+([A-Za-z0-9_]+)\\s*(:)\\s*(number)(\\[\\])?",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.control.directive.rustedwarfare"
+                        },
+                        "2": {
+                            "name": "variable.other.memory.name.rustedwarfare"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.key-value.rustedwarfare"
+                        },
+                        "4": {
+                            "name": "storage.type.number.rustedwarfare"
+                        },
+                        "5": {
+                            "name": "storage.modifier.array.rustedwarfare"
+                        }
+                    }
+                },
+                {
+                    "match": "^\\s*(@memory)\\s+([A-Za-z0-9_]+)\\s*(:)\\s*(boolean|bool)(\\[\\])?",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.control.directive.rustedwarfare"
+                        },
+                        "2": {
+                            "name": "variable.other.memory.name.rustedwarfare"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.key-value.rustedwarfare"
+                        },
+                        "4": {
+                            "name": "storage.type.boolean.rustedwarfare"
+                        },
+                        "5": {
+                            "name": "storage.modifier.array.rustedwarfare"
+                        }
+                    }
+                },
+                {
+                    "match": "^\\s*(@memory)\\s+([A-Za-z0-9_]+)\\s*(:)\\s*(string)(\\[\\])?",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.control.directive.rustedwarfare"
+                        },
+                        "2": {
+                            "name": "variable.other.memory.name.rustedwarfare"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.key-value.rustedwarfare"
+                        },
+                        "4": {
+                            "name": "storage.type.string.rustedwarfare"
+                        },
+                        "5": {
+                            "name": "storage.modifier.array.rustedwarfare"
+                        }
+                    }
+                }
+            ]
+        },
+        "comments": {
+            "match": "#.*$",
+            "name": "comment.line.number-sign.rustedwarfare"
+        },
+        "section": {
+            "patterns": [
+                {
+                    "match": "^\\s*(\\[)(ai)(\\])",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.section.begin.rustedwarfare"
+                        },
+                        "2": {
+                            "name": "keyword.control.section.ai.rustedwarfare"
+                        },
+                        "3": {
+                            "name": "punctuation.definition.section.end.rustedwarfare"
+                        }
+                    }
+                },
+                {
+                    "match": "^\\s*(\\[)(attack)(\\])",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.section.begin.rustedwarfare"
+                        },
+                        "2": {
+                            "name": "keyword.control.section.attack.rustedwarfare"
+                        },
+                        "3": {
+                            "name": "punctuation.definition.section.end.rustedwarfare"
+                        }
+                    }
+                },
+                {
+                    "match": "^\\s*(\\[)(core)(\\])",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.section.begin.rustedwarfare"
+                        },
+                        "2": {
+                            "name": "keyword.control.section.core.rustedwarfare"
+                        },
+                        "3": {
+                            "name": "punctuation.definition.section.end.rustedwarfare"
+                        }
+                    }
+                },
+                {
+                    "match": "^\\s*(\\[)(graphics)(\\])",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.section.begin.rustedwarfare"
+                        },
+                        "2": {
+                            "name": "keyword.control.section.graphics.rustedwarfare"
+                        },
+                        "3": {
+                            "name": "punctuation.definition.section.end.rustedwarfare"
+                        }
+                    }
+                },
+                {
+                    "match": "^\\s*(\\[)(movement)(\\])",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.section.begin.rustedwarfare"
+                        },
+                        "2": {
+                            "name": "keyword.control.section.movement.rustedwarfare"
+                        },
+                        "3": {
+                            "name": "punctuation.definition.section.end.rustedwarfare"
+                        }
+                    }
+                },
+                {
+                    "match": "^\\s*(\\[)(action)(_)([^\\]]+)(\\])",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.section.begin.rustedwarfare"
+                        },
+                        "2": {
+                            "name": "keyword.control.section.action.rustedwarfare"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.section.rustedwarfare"
+                        },
+                        "4": {
+                            "name": "variable.parameter.section.name.rustedwarfare"
+                        },
+                        "5": {
+                            "name": "punctuation.definition.section.end.rustedwarfare"
+                        }
+                    }
+                },
+                {
+                    "match": "^\\s*(\\[)(animation)(_)([^\\]]+)(\\])",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.section.begin.rustedwarfare"
+                        },
+                        "2": {
+                            "name": "keyword.control.section.animation.rustedwarfare"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.section.rustedwarfare"
+                        },
+                        "4": {
+                            "name": "variable.parameter.section.name.rustedwarfare"
+                        },
+                        "5": {
+                            "name": "punctuation.definition.section.end.rustedwarfare"
+                        }
+                    }
+                },
+                {
+                    "match": "^\\s*(\\[)(attachment)(_)([^\\]]+)(\\])",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.section.begin.rustedwarfare"
+                        },
+                        "2": {
+                            "name": "keyword.control.section.attachment.rustedwarfare"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.section.rustedwarfare"
+                        },
+                        "4": {
+                            "name": "variable.parameter.section.name.rustedwarfare"
+                        },
+                        "5": {
+                            "name": "punctuation.definition.section.end.rustedwarfare"
+                        }
+                    }
+                },
+                {
+                    "match": "^\\s*(\\[)(canBuild)(_)([^\\]]+)(\\])",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.section.begin.rustedwarfare"
+                        },
+                        "2": {
+                            "name": "keyword.control.section.canBuild.rustedwarfare"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.section.rustedwarfare"
+                        },
+                        "4": {
+                            "name": "variable.parameter.section.name.rustedwarfare"
+                        },
+                        "5": {
+                            "name": "punctuation.definition.section.end.rustedwarfare"
+                        }
+                    }
+                },
+                {
+                    "match": "^\\s*(\\[)(decal)(_)([^\\]]+)(\\])",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.section.begin.rustedwarfare"
+                        },
+                        "2": {
+                            "name": "keyword.control.section.decal.rustedwarfare"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.section.rustedwarfare"
+                        },
+                        "4": {
+                            "name": "variable.parameter.section.name.rustedwarfare"
+                        },
+                        "5": {
+                            "name": "punctuation.definition.section.end.rustedwarfare"
+                        }
+                    }
+                },
+                {
+                    "match": "^\\s*(\\[)(effect)(_)([^\\]]+)(\\])",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.section.begin.rustedwarfare"
+                        },
+                        "2": {
+                            "name": "keyword.control.section.effect.rustedwarfare"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.section.rustedwarfare"
+                        },
+                        "4": {
+                            "name": "variable.parameter.section.name.rustedwarfare"
+                        },
+                        "5": {
+                            "name": "punctuation.definition.section.end.rustedwarfare"
+                        }
+                    }
+                },
+                {
+                    "match": "^\\s*(\\[)(global_resource)(_)([^\\]]+)(\\])",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.section.begin.rustedwarfare"
+                        },
+                        "2": {
+                            "name": "keyword.control.section.global_resource.rustedwarfare"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.section.rustedwarfare"
+                        },
+                        "4": {
+                            "name": "variable.parameter.section.name.rustedwarfare"
+                        },
+                        "5": {
+                            "name": "punctuation.definition.section.end.rustedwarfare"
+                        }
+                    }
+                },
+                {
+                    "match": "^\\s*(\\[)(hiddenAction)(_)([^\\]]+)(\\])",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.section.begin.rustedwarfare"
+                        },
+                        "2": {
+                            "name": "keyword.control.section.hiddenAction.rustedwarfare"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.section.rustedwarfare"
+                        },
+                        "4": {
+                            "name": "variable.parameter.section.name.rustedwarfare"
+                        },
+                        "5": {
+                            "name": "punctuation.definition.section.end.rustedwarfare"
+                        }
+                    }
+                },
+                {
+                    "match": "^\\s*(\\[)(placementRule)(_)([^\\]]+)(\\])",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.section.begin.rustedwarfare"
+                        },
+                        "2": {
+                            "name": "keyword.control.section.placementRule.rustedwarfare"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.section.rustedwarfare"
+                        },
+                        "4": {
+                            "name": "variable.parameter.section.name.rustedwarfare"
+                        },
+                        "5": {
+                            "name": "punctuation.definition.section.end.rustedwarfare"
+                        }
+                    }
+                },
+                {
+                    "match": "^\\s*(\\[)(projectile)(_)([^\\]]+)(\\])",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.section.begin.rustedwarfare"
+                        },
+                        "2": {
+                            "name": "keyword.control.section.projectile.rustedwarfare"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.section.rustedwarfare"
+                        },
+                        "4": {
+                            "name": "variable.parameter.section.name.rustedwarfare"
+                        },
+                        "5": {
+                            "name": "punctuation.definition.section.end.rustedwarfare"
+                        }
+                    }
+                },
+                {
+                    "match": "^\\s*(\\[)(resource)(_)([^\\]]+)(\\])",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.section.begin.rustedwarfare"
+                        },
+                        "2": {
+                            "name": "keyword.control.section.resource.rustedwarfare"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.section.rustedwarfare"
+                        },
+                        "4": {
+                            "name": "variable.parameter.section.name.rustedwarfare"
+                        },
+                        "5": {
+                            "name": "punctuation.definition.section.end.rustedwarfare"
+                        }
+                    }
+                },
+                {
+                    "match": "^\\s*(\\[)(template)(_)([^\\]]+)(\\])",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.section.begin.rustedwarfare"
+                        },
+                        "2": {
+                            "name": "keyword.control.section.template.rustedwarfare"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.section.rustedwarfare"
+                        },
+                        "4": {
+                            "name": "variable.parameter.section.name.rustedwarfare"
+                        },
+                        "5": {
+                            "name": "punctuation.definition.section.end.rustedwarfare"
+                        }
+                    }
+                },
+                {
+                    "match": "^\\s*(\\[)(turret)(_)([^\\]]+)(\\])",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.section.begin.rustedwarfare"
+                        },
+                        "2": {
+                            "name": "keyword.control.section.turret.rustedwarfare"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.section.rustedwarfare"
+                        },
+                        "4": {
+                            "name": "variable.parameter.section.name.rustedwarfare"
+                        },
+                        "5": {
+                            "name": "punctuation.definition.section.end.rustedwarfare"
+                        }
+                    }
+                },
+                {
+                    "match": "^\\s*(\\[)([^\\]]+)(\\])",
+                    "captures": {
+                        "1": {
+                            "name": "punctuation.definition.section.begin.rustedwarfare"
+                        },
+                        "2": {
+                            "name": "entity.name.section.generic.rustedwarfare"
+                        },
+                        "3": {
+                            "name": "punctuation.definition.section.end.rustedwarfare"
+                        }
+                    }
+                }
+            ]
+        },
+        "directive": {
+            "match": "^\\s*(@[A-Za-z]+)\\s*(:)?",
+            "captures": {
+                "1": {
+                    "name": "keyword.control.directive.rustedwarfare"
+                },
+                "2": {
+                    "name": "punctuation.separator.key-value.rustedwarfare"
+                }
+            }
+        },
+        "key": {
+            "match": "^\\s*([A-Za-z_][A-Za-z0-9_]*)\\s*(:)",
+            "captures": {
+                "1": {
+                    "name": "variable.other.key.rustedwarfare"
+                },
+                "2": {
+                    "name": "punctuation.separator.key-value.rustedwarfare"
+                }
+            }
+        },
+        "value": {
+            "comment": "всё, что может встретиться ПОСЛЕ двоеточия в значении поля",
+            "patterns": [
+                {
+                    "include": "#typeName"
+                },
+                {
+                    "include": "#interpolation"
+                },
+                {
+                    "include": "#colorHex"
+                },
+                {
+                    "include": "#filepath"
+                },
+                {
+                    "include": "#logicKeywords"
+                },
+                {
+                    "include": "#function-call"
+                },
+                {
+                    "include": "#strings"
+                },
+                {
+                    "include": "#booleans"
+                },
+                {
+                    "include": "#time"
+                },
+                {
+                    "include": "#numbers"
+                },
+                {
+                    "include": "#operators"
+                }
+            ]
+        },
+        "interpolation": {
+            "match": "\\$\\{[^}]*\\}",
+            "name": "variable.other.interpolation.rustedwarfare"
+        },
+        "colorHex": {
+            "match": "#[0-9a-fA-F]{6}\\b",
+            "name": "constant.other.color.rustedwarfare"
+        },
+        "filepath": {
+            "match": "\\b(ROOT:)?[^\\s,:]+\\.(ini|txt|template|png|jpg|jpeg|ogg|wav|mp3)\\b",
+            "name": "string.other.filepath.rustedwarfare"
+        },
+        "logicKeywords": {
+            "patterns": [
+                {
+                    "match": "\\bself\\b",
+                    "name": "variable.language.self.rustedwarfare"
+                },
+                {
+                    "match": "\\b(memory|resource)(\\.[A-Za-z0-9_]+)?\\b",
+                    "name": "variable.other.property.rustedwarfare"
+                },
+                {
+                    "match": "\\b(and|or|not|if)\\b",
+                    "name": "keyword.operator.logical.rustedwarfare"
+                }
+            ]
+        },
+        "function-call": {
+            "match": "\\b([A-Za-z_][A-Za-z0-9_]*)\\s*(?=\\()",
+            "name": "entity.name.function.rustedwarfare"
+        },
+        "strings": {
+            "patterns": [
+                {
+                    "match": "'[^']*'",
+                    "name": "string.quoted.single.rustedwarfare"
+                },
+                {
+                    "match": "\"[^\"]*\"",
+                    "name": "string.quoted.double.rustedwarfare"
+                }
+            ]
+        },
+        "booleans": {
+            "match": "\\b(true|false)\\b",
+            "name": "constant.language.boolean.rustedwarfare"
+        },
+        "time": {
+            "match": "\\b\\d+(\\.\\d+)?(s|ms)\\b",
+            "name": "constant.numeric.time.rustedwarfare"
+        },
+        "numbers": {
+            "match": "\\b-?\\d+(\\.\\d+)?\\b",
+            "name": "constant.numeric.rustedwarfare"
+        },
+        "operators": {
+            "match": "(<=|>=|==|!=|\\+=|-=|<|>|=|\\+|-|/|\\*|%)",
+            "name": "keyword.operator.rustedwarfare"
+        },
+        "typeName": {
+            "comment": "Имя типа (LocaleString, bool, float...) — только если это ПОСЛЕДНЕЕ слово в значении, иначе словил бы обычные слова типа 'over time' в описаниях",
+            "match": "\\b(customResource|movementTypes|LocaleString|LogicBoolean|TeamRelation|logicBoolean|logicNumber|customPrice|unitTypes|resources|resource|relation|unitref|boolean|effects|dynamic|degrees|actions|string|images|effect|turret|marker|colour|memory|fields|float|point|event|image|price|color|bool|ints|enum|unit|time|list|tags|int)\\s*$",
+            "name": "support.type.rustedwarfare"
+        }
+    }
+}
