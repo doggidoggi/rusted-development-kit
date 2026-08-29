@@ -1,0 +1,6 @@
+{
+    "extension.displayName": "Rusted Development Kit",
+    "extension.description": "Поддержка языка для файлов модов Rusted Warfare",
+    "command.helloWorld.title": "Привет, мир",
+    "language.alias": "Rusted Warfare"
+}

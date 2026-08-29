@@ -1,4 +1,4 @@
-import schemaJson from "./schema.json";
+import schemaJson from "../data/schema.json";
 
 export interface FieldDoc {
   key: string;

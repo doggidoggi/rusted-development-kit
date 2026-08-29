@@ -1,8 +1,8 @@
 {
   "name": "rusted-development-kit",
-  "displayName": "Rusted Development Kit",
-  "description": "Simple development kit for Rusted Warfare.",
-  "version": "0.1.0",
+  "displayName": "%extension.displayName%",
+  "description": "%extension.description%",
+  "version": "0.1.1",
   "author": "doggidoggi",
   "publisher": "doggidoggi",
   "license": "MIT",
@@ -24,13 +24,13 @@
     "commands": [
       {
         "command": "rusted-development-kit.helloWorld",
-        "title": "Hello World"
+        "title": "%command.helloWorld.title%"
       }
     ],
     "languages": [
       {
         "id": "rustedwarfare",
-        "aliases": [ "Rusted Warfare INI" ],
+        "aliases": [ "%language.alias%" ],
         "extensions": [ ".ini" ],
         "configuration": "./language-configuration.json"
       }
