@@ -32,31 +32,21 @@
     ],
     "repository": {
         "multilineComment": {
-            "comment": "\"\"\" в НАЧАЛЕ строки (кроме пробелов) — это блок-комментарий",
             "begin": "^\\s*\"\"\"",
             "end": "\"\"\"",
             "name": "comment.block.rustedwarfare"
         },
         "commentSection": {
-            "comment": "секция [comment_XXX] — всё до следующей секции считается комментарием",
-            "begin": "^\\s*\\[comment_[^\\]]*\\]",
-            "end": "(?=^\\s*\\[[^\\]]*\\])",
-            "name": "comment.block.section.rustedwarfare",
-            "patterns": [
-                {
-                    "match": ".*",
-                    "name": "comment.block.rustedwarfare"
-                }
-            ]
-        },
+			"begin": "^\\s*\\[comment_[^\\]]*\\]",
+			"end": "(?=^\\s*\\[[^\\]]*\\])",
+			"name": "comment.block.rustedwarfare"
+		},
         "multistring": {
-            "comment": "\"\"\" НЕ в начале строки — это многострочная строка-значение, а не комментарий",
             "begin": "\"\"\"",
             "end": "\"\"\"",
             "name": "string.quoted.triple.rustedwarfare"
         },
         "memoryDefinition": {
-            "comment": "@memory name: type — каждый тип получает свой scope",
             "patterns": [
                 {
                     "match": "^\\s*(@memory)\\s+([A-Za-z0-9_]+)\\s*(:)\\s*(unit)(\\[\\])?",
@@ -527,7 +517,7 @@
             "match": "^\\s*([A-Za-z_][A-Za-z0-9_]*)\\s*(:)",
             "captures": {
                 "1": {
-                    "name": "variable.other.key.rustedwarfare"
+                    "name": "support.type.property-name.rustedwarfare"
                 },
                 "2": {
                     "name": "punctuation.separator.key-value.rustedwarfare"
@@ -535,7 +525,6 @@
             }
         },
         "value": {
-            "comment": "всё, что может встретиться ПОСЛЕ двоеточия в значении поля",
             "patterns": [
                 {
                     "include": "#typeName"
@@ -633,9 +622,15 @@
             "name": "keyword.operator.rustedwarfare"
         },
         "typeName": {
-            "comment": "Имя типа (LocaleString, bool, float...) — только если это ПОСЛЕДНЕЕ слово в значении, иначе словил бы обычные слова типа 'over time' в описаниях",
-            "match": "\\b(customResource|movementTypes|LocaleString|LogicBoolean|TeamRelation|logicBoolean|logicNumber|customPrice|unitTypes|resources|resource|relation|unitref|boolean|effects|dynamic|degrees|actions|string|images|effect|turret|marker|colour|memory|fields|float|point|event|image|price|color|bool|ints|enum|unit|time|list|tags|int)\\s*$",
-            "name": "support.type.rustedwarfare"
+            "match": "\\b(customResource|movementTypes|LocaleString|LogicBoolean|TeamRelation|logicBoolean|logicNumber|customPrice|unitTypes|resources|resource|relation|unitref|boolean|effects|dynamic|degrees|actions|string|images|effect|turret|marker|colour|memory|fields|float|point|event|image|price|color|bool|ints|enum|unit|time|list|tags|int)(\\[\\])?\\s*$",
+            "captures": {
+                "1": {
+                    "name": "support.type.rustedwarfare"
+                },
+                "2": {
+                    "name": "storage.modifier.array.rustedwarfare"
+                }
+            }
         }
     }
 }
