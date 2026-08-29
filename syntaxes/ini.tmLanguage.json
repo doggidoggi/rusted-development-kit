@@ -1,0 +1,636 @@
+{
+	"name": "Rusted Warfare INI",
+	"scopeName": "source.ini",
+	"patterns": [
+		{
+			"include": "#multilineComment"
+		},
+		{
+			"include": "#commentSection"
+		},
+		{
+			"include": "#multistring"
+		},
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#section"
+		},
+		{
+			"include": "#memoryDefinition"
+		},
+		{
+			"include": "#directive"
+		},
+		{
+			"include": "#key"
+		},
+		{
+			"include": "#value"
+		}
+	],
+	"repository": {
+		"multilineComment": {
+			"begin": "^\\s*\"\"\"",
+			"end": "\"\"\"",
+			"name": "comment.block.ini"
+		},
+		"commentSection": {
+			"begin": "^\\s*\\[comment_[^\\]]*\\]",
+			"end": "(?=^\\s*\\[[^\\]]*\\])",
+			"name": "comment.block.ini"
+		},
+		"multistring": {
+			"begin": "\"\"\"",
+			"end": "\"\"\"",
+			"name": "string.quoted.triple.ini"
+		},
+		"memoryDefinition": {
+			"patterns": [
+				{
+					"match": "^\\s*(@memory)\\s+([A-Za-z0-9_]+)\\s*(:)\\s*(unit)(\\[\\])?",
+					"captures": {
+						"1": {
+							"name": "keyword.control.directive.ini"
+						},
+						"2": {
+							"name": "variable.other.memory.name.ini"
+						},
+						"3": {
+							"name": "punctuation.separator.key-value.ini"
+						},
+						"4": {
+							"name": "storage.type.unit.ini"
+						},
+						"5": {
+							"name": "storage.modifier.array.ini"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(@memory)\\s+([A-Za-z0-9_]+)\\s*(:)\\s*(float)(\\[\\])?",
+					"captures": {
+						"1": {
+							"name": "keyword.control.directive.ini"
+						},
+						"2": {
+							"name": "variable.other.memory.name.ini"
+						},
+						"3": {
+							"name": "punctuation.separator.key-value.ini"
+						},
+						"4": {
+							"name": "storage.type.float.ini"
+						},
+						"5": {
+							"name": "storage.modifier.array.ini"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(@memory)\\s+([A-Za-z0-9_]+)\\s*(:)\\s*(number)(\\[\\])?",
+					"captures": {
+						"1": {
+							"name": "keyword.control.directive.ini"
+						},
+						"2": {
+							"name": "variable.other.memory.name.ini"
+						},
+						"3": {
+							"name": "punctuation.separator.key-value.ini"
+						},
+						"4": {
+							"name": "storage.type.number.ini"
+						},
+						"5": {
+							"name": "storage.modifier.array.ini"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(@memory)\\s+([A-Za-z0-9_]+)\\s*(:)\\s*(boolean|bool)(\\[\\])?",
+					"captures": {
+						"1": {
+							"name": "keyword.control.directive.ini"
+						},
+						"2": {
+							"name": "variable.other.memory.name.ini"
+						},
+						"3": {
+							"name": "punctuation.separator.key-value.ini"
+						},
+						"4": {
+							"name": "storage.type.boolean.ini"
+						},
+						"5": {
+							"name": "storage.modifier.array.ini"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(@memory)\\s+([A-Za-z0-9_]+)\\s*(:)\\s*(string)(\\[\\])?",
+					"captures": {
+						"1": {
+							"name": "keyword.control.directive.ini"
+						},
+						"2": {
+							"name": "variable.other.memory.name.ini"
+						},
+						"3": {
+							"name": "punctuation.separator.key-value.ini"
+						},
+						"4": {
+							"name": "storage.type.string.ini"
+						},
+						"5": {
+							"name": "storage.modifier.array.ini"
+						}
+					}
+				}
+			]
+		},
+		"comments": {
+			"match": "#.*$",
+			"name": "comment.line.number-sign.ini"
+		},
+		"section": {
+			"patterns": [
+				{
+					"match": "^\\s*(\\[)(ai)(\\])",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.section.begin.ini"
+						},
+						"2": {
+							"name": "keyword.control.section.ai.ini"
+						},
+						"3": {
+							"name": "punctuation.definition.section.end.ini"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(\\[)(attack)(\\])",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.section.begin.ini"
+						},
+						"2": {
+							"name": "keyword.control.section.attack.ini"
+						},
+						"3": {
+							"name": "punctuation.definition.section.end.ini"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(\\[)(core)(\\])",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.section.begin.ini"
+						},
+						"2": {
+							"name": "keyword.control.section.core.ini"
+						},
+						"3": {
+							"name": "punctuation.definition.section.end.ini"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(\\[)(graphics)(\\])",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.section.begin.ini"
+						},
+						"2": {
+							"name": "keyword.control.section.graphics.ini"
+						},
+						"3": {
+							"name": "punctuation.definition.section.end.ini"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(\\[)(movement)(\\])",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.section.begin.ini"
+						},
+						"2": {
+							"name": "keyword.control.section.movement.ini"
+						},
+						"3": {
+							"name": "punctuation.definition.section.end.ini"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(\\[)(action)(_)([^\\]]+)(\\])",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.section.begin.ini"
+						},
+						"2": {
+							"name": "keyword.control.section.action.ini"
+						},
+						"3": {
+							"name": "punctuation.separator.section.ini"
+						},
+						"4": {
+							"name": "variable.parameter.section.name.ini"
+						},
+						"5": {
+							"name": "punctuation.definition.section.end.ini"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(\\[)(animation)(_)([^\\]]+)(\\])",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.section.begin.ini"
+						},
+						"2": {
+							"name": "keyword.control.section.animation.ini"
+						},
+						"3": {
+							"name": "punctuation.separator.section.ini"
+						},
+						"4": {
+							"name": "variable.parameter.section.name.ini"
+						},
+						"5": {
+							"name": "punctuation.definition.section.end.ini"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(\\[)(attachment)(_)([^\\]]+)(\\])",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.section.begin.ini"
+						},
+						"2": {
+							"name": "keyword.control.section.attachment.ini"
+						},
+						"3": {
+							"name": "punctuation.separator.section.ini"
+						},
+						"4": {
+							"name": "variable.parameter.section.name.ini"
+						},
+						"5": {
+							"name": "punctuation.definition.section.end.ini"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(\\[)(canBuild)(_)([^\\]]+)(\\])",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.section.begin.ini"
+						},
+						"2": {
+							"name": "keyword.control.section.canBuild.ini"
+						},
+						"3": {
+							"name": "punctuation.separator.section.ini"
+						},
+						"4": {
+							"name": "variable.parameter.section.name.ini"
+						},
+						"5": {
+							"name": "punctuation.definition.section.end.ini"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(\\[)(decal)(_)([^\\]]+)(\\])",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.section.begin.ini"
+						},
+						"2": {
+							"name": "keyword.control.section.decal.ini"
+						},
+						"3": {
+							"name": "punctuation.separator.section.ini"
+						},
+						"4": {
+							"name": "variable.parameter.section.name.ini"
+						},
+						"5": {
+							"name": "punctuation.definition.section.end.ini"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(\\[)(effect)(_)([^\\]]+)(\\])",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.section.begin.ini"
+						},
+						"2": {
+							"name": "keyword.control.section.effect.ini"
+						},
+						"3": {
+							"name": "punctuation.separator.section.ini"
+						},
+						"4": {
+							"name": "variable.parameter.section.name.ini"
+						},
+						"5": {
+							"name": "punctuation.definition.section.end.ini"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(\\[)(global_resource)(_)([^\\]]+)(\\])",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.section.begin.ini"
+						},
+						"2": {
+							"name": "keyword.control.section.global_resource.ini"
+						},
+						"3": {
+							"name": "punctuation.separator.section.ini"
+						},
+						"4": {
+							"name": "variable.parameter.section.name.ini"
+						},
+						"5": {
+							"name": "punctuation.definition.section.end.ini"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(\\[)(hiddenAction)(_)([^\\]]+)(\\])",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.section.begin.ini"
+						},
+						"2": {
+							"name": "keyword.control.section.hiddenAction.ini"
+						},
+						"3": {
+							"name": "punctuation.separator.section.ini"
+						},
+						"4": {
+							"name": "variable.parameter.section.name.ini"
+						},
+						"5": {
+							"name": "punctuation.definition.section.end.ini"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(\\[)(placementRule)(_)([^\\]]+)(\\])",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.section.begin.ini"
+						},
+						"2": {
+							"name": "keyword.control.section.placementRule.ini"
+						},
+						"3": {
+							"name": "punctuation.separator.section.ini"
+						},
+						"4": {
+							"name": "variable.parameter.section.name.ini"
+						},
+						"5": {
+							"name": "punctuation.definition.section.end.ini"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(\\[)(projectile)(_)([^\\]]+)(\\])",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.section.begin.ini"
+						},
+						"2": {
+							"name": "keyword.control.section.projectile.ini"
+						},
+						"3": {
+							"name": "punctuation.separator.section.ini"
+						},
+						"4": {
+							"name": "variable.parameter.section.name.ini"
+						},
+						"5": {
+							"name": "punctuation.definition.section.end.ini"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(\\[)(resource)(_)([^\\]]+)(\\])",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.section.begin.ini"
+						},
+						"2": {
+							"name": "keyword.control.section.resource.ini"
+						},
+						"3": {
+							"name": "punctuation.separator.section.ini"
+						},
+						"4": {
+							"name": "variable.parameter.section.name.ini"
+						},
+						"5": {
+							"name": "punctuation.definition.section.end.ini"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(\\[)(template)(_)([^\\]]+)(\\])",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.section.begin.ini"
+						},
+						"2": {
+							"name": "keyword.control.section.template.ini"
+						},
+						"3": {
+							"name": "punctuation.separator.section.ini"
+						},
+						"4": {
+							"name": "variable.parameter.section.name.ini"
+						},
+						"5": {
+							"name": "punctuation.definition.section.end.ini"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(\\[)(turret)(_)([^\\]]+)(\\])",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.section.begin.ini"
+						},
+						"2": {
+							"name": "keyword.control.section.turret.ini"
+						},
+						"3": {
+							"name": "punctuation.separator.section.ini"
+						},
+						"4": {
+							"name": "variable.parameter.section.name.ini"
+						},
+						"5": {
+							"name": "punctuation.definition.section.end.ini"
+						}
+					}
+				},
+				{
+					"match": "^\\s*(\\[)([^\\]]+)(\\])",
+					"captures": {
+						"1": {
+							"name": "punctuation.definition.section.begin.ini"
+						},
+						"2": {
+							"name": "entity.name.section.generic.ini"
+						},
+						"3": {
+							"name": "punctuation.definition.section.end.ini"
+						}
+					}
+				}
+			]
+		},
+		"directive": {
+			"match": "^\\s*(@[A-Za-z]+)\\s*(:)?",
+			"captures": {
+				"1": {
+					"name": "keyword.control.directive.ini"
+				},
+				"2": {
+					"name": "punctuation.separator.key-value.ini"
+				}
+			}
+		},
+		"key": {
+			"match": "^\\s*([A-Za-z_][A-Za-z0-9_]*)\\s*(:)",
+			"captures": {
+				"1": {
+					"name": "support.type.property-name.ini"
+				},
+				"2": {
+					"name": "punctuation.separator.key-value.ini"
+				}
+			}
+		},
+		"value": {
+			"patterns": [
+				{
+					"include": "#typeName"
+				},
+				{
+					"include": "#interpolation"
+				},
+				{
+					"include": "#colorHex"
+				},
+				{
+					"include": "#filepath"
+				},
+				{
+					"include": "#logicKeywords"
+				},
+				{
+					"include": "#function-call"
+				},
+				{
+					"include": "#strings"
+				},
+				{
+					"include": "#booleans"
+				},
+				{
+					"include": "#time"
+				},
+				{
+					"include": "#numbers"
+				},
+				{
+					"include": "#operators"
+				}
+			]
+		},
+		"interpolation": {
+			"match": "\\$\\{[^}]*\\}",
+			"name": "variable.other.interpolation.ini"
+		},
+		"colorHex": {
+			"match": "#[0-9a-fA-F]{6}\\b",
+			"name": "constant.other.color.ini"
+		},
+		"filepath": {
+			"match": "\\b(ROOT:)?[^\\s,:]+\\.(ini|txt|template|png|jpg|jpeg|ogg|wav|mp3)\\b",
+			"name": "string.other.filepath.ini"
+		},
+		"logicKeywords": {
+			"patterns": [
+				{
+					"match": "\\bself\\b",
+					"name": "variable.language.self.ini"
+				},
+				{
+					"match": "\\b(memory|resource)(\\.[A-Za-z0-9_]+)?\\b",
+					"name": "variable.other.property.ini"
+				},
+				{
+					"match": "\\b(and|or|not|if)\\b",
+					"name": "keyword.operator.logical.ini"
+				}
+			]
+		},
+		"function-call": {
+			"match": "\\b([A-Za-z_][A-Za-z0-9_]*)\\s*(?=\\()",
+			"name": "entity.name.function.ini"
+		},
+		"strings": {
+			"patterns": [
+				{
+					"match": "'[^']*'",
+					"name": "string.quoted.single.ini"
+				},
+				{
+					"match": "\"[^\"]*\"",
+					"name": "string.quoted.double.ini"
+				}
+			]
+		},
+		"booleans": {
+			"match": "\\b(true|false)\\b",
+			"name": "constant.language.boolean.ini"
+		},
+		"time": {
+			"match": "\\b\\d+(\\.\\d+)?(s|ms)\\b",
+			"name": "constant.numeric.time.ini"
+		},
+		"numbers": {
+			"match": "\\b-?\\d+(\\.\\d+)?\\b",
+			"name": "constant.numeric.ini"
+		},
+		"operators": {
+			"match": "(<=|>=|==|!=|\\+=|-=|<|>|=|\\+|-|/|\\*|%)",
+			"name": "keyword.operator.ini"
+		},
+		"typeName": {
+			"match": "\\b(customResource|movementTypes|LocaleString|LogicBoolean|TeamRelation|logicBoolean|logicNumber|customPrice|unitTypes|resources|resource|relation|unitref|boolean|effects|dynamic|degrees|actions|string|images|effect|turret|marker|colour|memory|fields|float|point|event|image|price|color|bool|ints|enum|unit|time|list|tags|int)(\\[\\])?\\s*$",
+			"captures": {
+				"1": {
+					"name": "support.type.ini"
+				},
+				"2": {
+					"name": "storage.modifier.array.ini"
+				}
+			}
+		}
+	}
+}
