@@ -6,17 +6,17 @@ import { parse, ParsedDocument } from "./model";
 const cache = new Map<string, { version: number; parsed: ParsedDocument }>();
 
 export function getParsed(document: vscode.TextDocument): ParsedDocument {
-  const key = document.uri.toString();
-  const cached = cache.get(key);
-  if (cached && cached.version === document.version) {
-    return cached.parsed;
-  }
+	const key = document.uri.toString();
+	const cached = cache.get(key);
+	if (cached && cached.version === document.version) {
+		return cached.parsed;
+	}
 
-  const parsed = parse(document);
-  cache.set(key, { version: document.version, parsed });
-  return parsed;
+	const parsed = parse(document);
+	cache.set(key, { version: document.version, parsed });
+	return parsed;
 }
 
 export function clearParsed(uri: vscode.Uri): void {
-  cache.delete(uri.toString());
+	cache.delete(uri.toString());
 }
