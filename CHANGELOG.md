@@ -2,6 +2,11 @@
 
 All notable changes to the "Rusted Development Kit" extension are documented in this file.
 
+## [0.2.1] - 2026-08-30
+
+### Fixed
+- Fixed hover language.
+
 ## [0.2.0] - 2026-08-29
 
 ### Added

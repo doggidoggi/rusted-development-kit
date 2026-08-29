@@ -13,7 +13,7 @@ export function createHoverProvider(): vscode.HoverProvider {
 			if (section) {
 				const md = new vscode.MarkdownString();
 				md.supportThemeIcons = true;
-				md.appendCodeblock(`[${section.name}]`, "rustedwarfare");
+				md.appendCodeblock(`[${section.name}]`, "ini");
 				md.appendMarkdown(`$(symbol-namespace) \`${section.type}\``);
 				return new vscode.Hover(md);
 			}
@@ -32,7 +32,7 @@ export function createHoverProvider(): vscode.HoverProvider {
 					md.supportThemeIcons = true;
 
 					if (resolved.kind === "unknown") {
-						md.appendCodeblock(field.key, "rustedwarfare");
+						md.appendCodeblock(field.key, "ini");
 						md.appendMarkdown(
 							s.type === "template"
 								? `$(circle-slash) Not found in any documented section`
@@ -46,7 +46,7 @@ export function createHoverProvider(): vscode.HoverProvider {
 					const signature = doc.valueType
 						? `${doc.key}: ${doc.valueType}`
 						: doc.key;
-					md.appendCodeblock(signature, "rustedwarfare");
+					md.appendCodeblock(signature, "ini");
 
 					const badges: string[] = [];
 					if (s.type === "template")
@@ -68,7 +68,7 @@ export function createHoverProvider(): vscode.HoverProvider {
 					}
 					if (doc.example) {
 						md.appendMarkdown("$(code) *Example*");
-						md.appendCodeblock(doc.example, "rustedwarfare");
+						md.appendCodeblock(doc.example, "ini");
 					}
 					if (doc.since) {
 						md.appendMarkdown(`$(history) *Added in ${doc.since}*`);

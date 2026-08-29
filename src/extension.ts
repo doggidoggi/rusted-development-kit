@@ -7,7 +7,7 @@ import { registerFormatter } from "./formatter/iniFormatter";
 
 export function activate(context: vscode.ExtensionContext) {
 	const diagnostics =
-		vscode.languages.createDiagnosticCollection("rustedwarfare");
+		vscode.languages.createDiagnosticCollection("ini");
 	context.subscriptions.push(diagnostics);
 
 	const decorations = createDecorationRegistry();
@@ -15,7 +15,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	function update(document: vscode.TextDocument) {
 		if (document.uri.scheme !== "file") return;
-		if (document.languageId !== "rustedwarfare") return;
+		if (document.languageId !== "ini") return;
 
 		const parsed = getParsed(document);
 		const { diagnostics: problems, decorationRanges } = runRules(parsed);
@@ -55,7 +55,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(
 		vscode.languages.registerHoverProvider(
-			"rustedwarfare",
+			"ini",
 			createHoverProvider(),
 		),
 	);
