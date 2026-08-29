@@ -6,6 +6,7 @@ All notable changes to the "Rusted Development Kit" extension are documented in 
  
 ### Fixed
 - Lowered the minimum required VS Code / VSCodium version (`engines.vscode`) to `^1.125.0` for broader compatibility with current VSCodium releases.
+- Fixed highlighting.
 
 ## [0.1.1] - 2026-08-29
  
